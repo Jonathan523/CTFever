@@ -3,20 +3,21 @@
     <div class="primary-form">
       <InteractiveBlock class="space-y-4">
         <PrimaryFileUploader @change="fileChanged" :mime-type="['zip', '.zip']"/>
-        <PrimaryButton class="w-full" :disable="loading" @click="check">{{
+        <UniButton class="w-full" :disabled="loading" @click="check"
+                   :icon="loading ? 'tabler:cloud-upload' : 'tabler:eyeglass'">{{
             loading ? 'Uploading...' : 'Check'
           }}
-        </PrimaryButton>
+        </UniButton>
       </InteractiveBlock>
       <InteractiveDoubleColumns v-if="result">
         <template v-slot:left>
           <div
             class="flex flex-col justify-center items-center p-4 bg-gray-100 dark:bg-slate-700 dark:text-slate-300 rounded-lg">
             <div class="flex flex-col items-center">
-              <ion-icon v-if="result && result.assert === 1" class="text-6xl" name="glasses-outline"></ion-icon>
-              <ion-icon v-if="result && result.assert === 0" class="text-6xl" name="document-lock-outline"></ion-icon>
-              <ion-icon v-if="result && result.assert === -1" class="text-6xl" name="lock-open-outline"></ion-icon>
-              <ion-icon v-if="result && result.assert === -2" class="text-6xl" name="help-circle-outline"></ion-icon>
+              <Icon v-if="result && result.assert === 1" icon="tabler:spy" class="text-6xl"/>
+              <Icon v-if="result && result.assert === 0" icon="tabler:shield-lock" class="text-6xl"/>
+              <Icon v-if="result && result.assert === -1" icon="tabler:file-zip" class="text-6xl"/>
+              <Icon v-if="result && result.assert === -2" icon="tabler:file-unknown" class="text-6xl"/>
               <p v-if="result && result.assert === 1" class="text-lg font-bold text-orange-500">伪加密</p>
               <p v-if="result && result.assert === 0" class="text-lg font-bold text-green-500">加密</p>
               <p v-if="result && result.assert === -1" class="text-lg font-bold text-blue-500">未加密</p>
@@ -74,23 +75,26 @@
 <script>
 import PrimaryContainer from "~/components/tool/PrimaryContainer.vue";
 import InteractiveBlock from "~/components/tool/InteractiveBlock.vue";
-import PrimaryInput from "~/components/form/PrimaryInput.vue";
-import PrimaryButton from "~/components/form/PrimaryButton.vue";
 import CodeBlock from "~/components/widgets/CodeBlock.vue";
 import PrimaryFileUploader from "~/components/form/PrimaryFileUploader.vue";
 import InteractiveDoubleColumns from "~/components/tool/InteractiveDoubleColumns.vue";
+import {Icon} from "@iconify/vue2";
 
 // TODO: i18n
 
 export default {
   name: 'PseudoEncryptedZipCheck',
   components: {
+    Icon,
     InteractiveDoubleColumns,
-    PrimaryFileUploader, CodeBlock, PrimaryButton, PrimaryInput, InteractiveBlock, PrimaryContainer
+    PrimaryFileUploader, CodeBlock, InteractiveBlock, PrimaryContainer
   },
   head() {
     return {
-      title: this.$t('tool.pseudoEncryptedZipCheck.title') + ' - ' + this.$t('app.name')
+      title: this.$t('tool.pseudoEncryptedZipCheck.title') + ' - ' + this.$t('app.name'),
+      meta: [
+        {hid: "description", name: "description", content: this.$t("tool.pseudoEncryptedZipCheck.desc")},
+      ],
     }
   },
   data() {

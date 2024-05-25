@@ -12,15 +12,86 @@ export default {
     login: '登陆',
     signup: '创建账号',
     back: '返回',
+    install_pwa: '安装',
     appearance: {
       light: '亮色',
       dark: '暗色',
       auto: '自动'
     },
+    share: '分享',
+    share_link: '包含页面状态的链接',
+    drawer_collapse: '收起',
+  },
+  context_menu: {
+    external_link: '在新窗口打开',
+    mark_add: '添加到收藏',
+    mark_remove: '移出收藏夹',
+    copy: '复制链接',
   },
   action: {
     marked: '已收藏',
-    unmarked: '已移出收藏'
+    unmarked: '已移出收藏',
+    copied: '已复制到剪贴板',
+    copied_with_state: '已复制{}到剪贴板',
+  },
+  settings: {
+    appearance: {
+      label: '外观',
+      language: {
+        label: '语言',
+      },
+      color_mode: {
+        label: '颜色模式',
+        mode: {
+          light: '浅色',
+          dark: '深色',
+          auto: '自动',
+        },
+      },
+    },
+    about: {
+      label: '关于',
+      version: {
+        label: '版本',
+        check_update_logs: '更新日志',
+      },
+      follow_us: {
+        label: '关注我们',
+        subtitle: '关注我们并取得更新资讯',
+      },
+      donate: {
+        label: '捐赠',
+        subtitle: '如果你喜欢 CTFever，欢迎捐赠以支持我们的开发',
+        link: {
+          afdian: '爱发电',
+        }
+      },
+    },
+    backend: {
+      label: '后端',
+      subtitle: '部分工具需要后端支持',
+      endpoint: {
+        label: '服务器端点',
+      },
+      version: {
+        label: '服务端版本',
+      }
+    },
+    danger_zone: {
+      label: '危险区',
+      subtitle: '这些操作可能会影响或破坏本地数据',
+      wipe: {
+        label: '清空数据',
+        subtitle: '删除所有本地数据，该操作不可恢复',
+        btn: '清除',
+        dialog: {
+          title: '清空数据',
+          content: '删除本地的收藏列表、所有偏好设置及最近使用的工具。该操作无法撤销',
+          okText: '确认清空',
+          cancelText: '取消',
+        },
+      }
+    }
   },
   common: {
     radix: {
@@ -35,6 +106,8 @@ export default {
       recommended: '精选',
       beta: '实验性'
     },
+    copy: '复制',
+    copied: '已复制',
     btn_encode: '编码',
     btn_decode: '解码',
     btn_encrypt: '加密',
@@ -76,6 +149,9 @@ export default {
         title: '收藏夹',
         desc: '收藏的常用工具集'
       },
+    },
+    settings: {
+      title: '首选项'
     },
     notFound: {
       title: '未找到页面',
@@ -188,7 +264,8 @@ export default {
     // Data Conversion
     radixConversion: {
       title: '进制转换',
-      desc: '将输入数字转换为不同进制的输出'
+      desc: '将输入数字转换为不同进制的输出',
+      readable: '易读形式',
     },
     timeStamp: {
       title: '时间戳转换',
@@ -201,6 +278,14 @@ export default {
       fromNow: '到现在的时间',
       dayOfYear: '天数',
       weekOfYear: '周数'
+    },
+    base2img: {
+      title: 'Base64 图片转换',
+      desc: '图片和 Base64 互相转换'
+    },
+    dataUnitsConversion: {
+      title: '数据存储单位换算',
+      desc: 'kbit/KB/KiB 等单位的换算'
     },
     // Program Related
     pycDecompiler: {
@@ -249,10 +334,6 @@ export default {
       title: '温度换算',
       desc: '将温度转换为多种单位'
     },
-    base2img: {
-      title: 'Base64 图片转换',
-      desc: '图片和 Base64 互相转换'
-    },
     coreValues: {
       title: '核心价值观密码',
       desc: '富强民主文明和谐自由平等公正法制爱国敬业诚信友善！'
@@ -268,6 +349,10 @@ export default {
     pseudoEncryptedZipCheck: {
       title: 'Zip 伪加密检测',
       desc: '检查上传的 Zip 文件是否为伪加密文件'
+    },
+    zeroWidthSteganography: {
+      title: '零宽文本隐写',
+      desc: '带有 Unicode 零宽度字符的纯文本隐写术'
     },
   },
   tags: {

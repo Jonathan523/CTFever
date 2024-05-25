@@ -34,7 +34,7 @@ export const state = () => ({
     {
       title: 'toolkit.EaD.title',
       description: 'toolkit.EaD.desc',
-      icon: 'code-outline',
+      icon: 'tabler:code-asterix',
       tools: [
         {
           title: 'tool.ascii.title',
@@ -71,13 +71,13 @@ export const state = () => ({
           description: 'tool.utf8Conversion.desc',
           route: '/tools/utf8-conversion',
           tags: [tagCategories.encodingAndDecoding, tagCategories.conversion],
-          newest: true
         },
         {
           title: 'tool.jsonSerializer.title',
           description: 'tool.jsonSerializer.desc',
           route: '/tools/json-serializer',
           tags: [tagCategories.editor, tagCategories.conversion],
+          shareable: true,
           newest: true
         },
         // {
@@ -85,7 +85,6 @@ export const state = () => ({
         //   description: 'tool.ciphey.desc',
         //   route: '/tools/ciphey',
         //   tags: [tagCategories.encodingAndDecoding],
-        //   newest: false,
         //   disabled: true
         // },
       ]
@@ -93,7 +92,7 @@ export const state = () => ({
     {
       title: 'toolkit.cryptography.title',
       description: 'toolkit.cryptography.desc',
-      icon: 'key-outline',
+      icon: 'tabler:key',
       tools: [
         {
           title: 'tool.uuid.title',
@@ -136,7 +135,6 @@ export const state = () => ({
           description: 'tool.cloudShadow.desc',
           route: '/tools/cloud-shadow',
           tags: [tagCategories.encryptionAndDecryption],
-          // newest: true,
           disabled: true
         },
       ]
@@ -144,7 +142,7 @@ export const state = () => ({
     {
       title: 'toolkit.programRelated.title',
       description: 'toolkit.programRelated.desc',
-      icon: 'bug-outline',
+      icon: 'tabler:code',
       tools: [
         {
           title: 'tool.pycDecompiler.title',
@@ -152,8 +150,6 @@ export const state = () => ({
           route: '/tools/pyc-decompiler',
           tags: [tagCategories.decompiler],
           premium: true,
-          recommended: true,
-          beta: false,
         },
         {
           title: 'tool.binExtract.title',
@@ -161,8 +157,6 @@ export const state = () => ({
           route: '/tools/bin-extractor',
           tags: [tagCategories.reverse],
           premium: true,
-          recommended: true,
-          beta: false,
         },
         {
           title: 'tool.jsFuck.title',
@@ -182,7 +176,7 @@ export const state = () => ({
     {
       title: 'toolkit.networkTool.title',
       description: 'toolkit.networkTool.desc',
-      icon: 'globe-outline',
+      icon: 'tabler:planet',
       tools: [
         {
           title: 'tool.ipAttribution.title',
@@ -197,21 +191,20 @@ export const state = () => ({
           route: '/tools/port-scan',
           tags: [tagCategories.utility],
           premium: true,
-          recommended: true,
-          beta: false,
         },
       ]
     },
     {
       title: 'toolkit.dataConversion.title',
       description: 'toolkit.dataConversion.desc',
-      icon: 'hardware-chip-outline',
+      icon: 'tabler:transform',
       tools: [
         {
           title: 'tool.radixConversion.title',
           description: 'tool.radixConversion.desc',
           route: '/tools/radix-conversion',
-          tags: [tagCategories.conversion]
+          tags: [tagCategories.conversion],
+          shareable: true,
         },
         {
           title: 'tool.timeStamp.title',
@@ -224,6 +217,13 @@ export const state = () => ({
           description: 'tool.base2img.desc',
           route: '/tools/base64-to-image',
           tags: [tagCategories.conversion],
+        },
+        {
+          title: 'tool.dataUnitsConversion.title',
+          description: 'tool.dataUnitsConversion.desc',
+          route: '/tools/data-units-conversion',
+          tags: [tagCategories.conversion],
+          shareable: true,
           newest: true,
         },
       ]
@@ -231,7 +231,7 @@ export const state = () => ({
     {
       title: 'toolkit.misc.title',
       description: 'toolkit.misc.desc',
-      icon: 'construct-outline',
+      icon: 'tabler:tools',
       tools: [
         {
           title: 'tool.serialTool.title',
@@ -243,7 +243,8 @@ export const state = () => ({
           title: 'tool.crc.title',
           description: 'tool.crc.desc',
           route: '/tools/crc-checksum',
-          tags: [tagCategories.check, tagCategories.hash]
+          tags: [tagCategories.check, tagCategories.hash],
+          shareable: true
         },
         // {
         //   title: 'tool.temperatureConversion.title',
@@ -285,7 +286,14 @@ export const state = () => ({
           route: '/tools/pseudo-encrypted-zip-check',
           tags: [tagCategories.steganography],
           premium: true,
-          newest: true,
+        },
+        {
+          title: 'tool.zeroWidthSteganography.title',
+          description: 'tool.zeroWidthSteganography.desc',
+          route: '/tools/zero-width-steganography',
+          tags: [tagCategories.steganography],
+          // newest: true,
+          disabled: true
         },
       ]
     }

@@ -1,8 +1,17 @@
+const CEVER_BACKEND_BASE_FALLBACK = 'https://ctfever-service.uniiem.com'
+
 export default {
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
   ssr: false,
-  target: "static",
-
+  target: process.env.CEVER_RUN_MODE || "static",
+  server: {
+    host: process.env.NODE_ENV === 'production' ? '0.0.0.0' : 'localhost'
+  },
+  publicRuntimeConfig: {
+    version: process.env.CEVER_VERSION || 'unstable',
+    CEVER_BACKEND_BASE: process.env.CEVER_BACKEND_BASE || null,
+    CEVER_BACKEND_BASE_FALLBACK: CEVER_BACKEND_BASE_FALLBACK
+  },
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     title: "CTFever Toolkit by uniiem",
@@ -18,12 +27,12 @@ export default {
         hid: "description",
         name: "description",
         title: "description",
-        content: "Free and awesome toolkit for CTF fevers and everyone."
+        content: "免费的超赞 CTF 工具箱。为所有人准备的工具箱，包含pyc反编译、binwalk、端口扫描、Zip伪加密检测，以及多种加密、编码、Json编辑器和各种实用工具。"
       },
       {
         name: "keywords",
         content:
-          "CTF, CTFever, CTF Toolkit, CTF Toolkit by uniiem, 进制, 在线工具, 古典密码, 凯撒密码, 哈希, 反编译, URL 编码, 栅栏密码, 猪圈密码, 摩斯密码, Morse Code, MD5, BrainFuck, 端口扫描, Port Scan, 时间戳, Timestamp, Base64, ROT-13, pyc decompiler, pyc 反编译, IP",
+          "CTF,CTFever,CTF Toolkit,CTF Toolkit by uniiem,进制,在线工具,古典密码,凯撒密码,哈希,反编译,URL 编码,栅栏密码,猪圈密码,摩斯密码,Morse Code,MD5,BrainFuck,端口扫描,Port Scan,时间戳,Timestamp,Base64,ROT-13,pyc decompiler,pyc 反编译,IP,伪加密,数据存储格式转换",
       },
       {title: "format-detection", content: "telephone=no"},
       {name: "apple-mobile-web-app-capable", content: "yes"},
@@ -55,26 +64,6 @@ export default {
         rel: "preload",
         href: "//fonts.font.im/css?family=PT+Mono|PT+Sans|Poppins|Nunito&display=swap",
         as: "font"
-      },
-      {
-        rel: "preload",
-        href: "//unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js",
-        as: "script"
-      },
-      {
-        rel: "preload",
-        href: "//unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js",
-        as: "script"
-      }
-    ],
-    script: [
-      {
-        src: "https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js",
-        type: "module"
-      },
-      {
-        src: "https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js",
-        type: "nomodule"
       }
     ]
   },
@@ -90,7 +79,8 @@ export default {
   plugins: [
     "@/plugins/antd-ui",
     "@/plugins/g-tag",
-    "@/plugins/api"
+    "@/plugins/api",
+    "@/plugins/vue-js-modal"
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -99,7 +89,6 @@ export default {
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
     "@nuxt/postcss8",
-    "@nuxtjs/pwa",
     "@nuxtjs/device"
   ],
 
@@ -111,6 +100,8 @@ export default {
     "@nuxtjs/pwa",
     // https://go.nuxtjs.dev/i18n
     "@nuxtjs/i18n",
+    "@nuxtjs/pwa",
+    '@nuxtjs/toast',
     "@nuxt/content",
     [
       "nuxt-matomo",
@@ -133,7 +124,14 @@ export default {
   // },
 
   loading: {
+    color: 'mediumspringgreen',
     continuous: true
+  },
+
+  loadingIndicator: {
+    name: 'folding-cube',
+    color: '#81dab4',
+    background: 'white'
   },
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
@@ -165,11 +163,14 @@ export default {
     workbox: {
       workboxURL: "/third_party/workbox/workbox-sw.js",
       config: {
-        modulePathPrefix: "/third_party/workbox/"
-      }
+        modulePathPrefix: "/third_party/workbox/",
+        debug: process.env.NODE_ENV !== "production"
+      },
+      offlineAnalytics: true
     },
     manifest: {
       lang: "zh",
+      id: "/?standalone=true",
       name: "CTFever",
       short_name: "CTFever",
       description: "A fantastic toolkit for CTFers and everyone by uniiem.",
@@ -188,6 +189,10 @@ export default {
     }
   },
 
+  toast: {
+    position: 'top-center'
+  },
+
   sitemap: {
     hostname: "https://ctfever.uniiem.com",
     gzip: true,
@@ -201,15 +206,9 @@ export default {
   },
 
   proxy: {
-    '/api/': {
-      target: 'https://ctfever-service-gen1.i0x0i.ltd',
-      changeOrigin: true,
-      pathRewrite: {
-        '^/api/': '/'
-      }
-    },
     '/gateway/': {
-      target: process.env.NODE_ENV === 'production' ? 'https://ctfever-service.uniiem.com' : 'http://127.0.0.1:8080',
+      // target: process.env.NODE_ENV === 'production' ? 'https://ctfever-service.uniiem.com' : 'http://127.0.0.1:8080',
+      target: process.env.CEVER_BACKEND_BASE || CEVER_BACKEND_BASE_FALLBACK,
       changeOrigin: true,
       pathRewrite: {
         '^/gateway/': '/'
@@ -225,14 +224,16 @@ export default {
         iso: "en-US",
         file: "en-US.js",
         name: "English",
-        label: "English"
+        label: "English",
+        icon: "twemoji:flag-united-kingdom"
       },
       {
         code: "zh",
         iso: "zh-CN",
         file: "zh-CN.js",
         name: "简体中文",
-        label: "简体中文"
+        label: "简体中文",
+        icon: "twemoji:flag-china"
       },
       // {
       //   code: 'ja',
@@ -261,14 +262,20 @@ export default {
     vueI18nLoader: true
   },
 
-  content: {},
+  content: {
+    experimental: {
+      clientDb: true
+    }
+  },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
     postcss: {
-      plugins: {
-        tailwindcss: {},
-        autoprefixer: {}
+      postcssOptions: {
+        plugins: {
+          tailwindcss: {},
+          autoprefixer: {}
+        }
       }
     }
   }

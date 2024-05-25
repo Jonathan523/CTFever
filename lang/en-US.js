@@ -12,15 +12,86 @@ export default {
     login: 'LOGIN',
     signup: 'SIGN UP',
     back: 'Back',
+    install_pwa: 'Install',
     appearance: {
       light: 'Light',
       dark: 'Dark',
       auto: 'Auto'
     },
+    share: 'Share',
+    share_link: 'Link with page state',
+    drawer_collapse: 'Collapse',
+  },
+  context_menu: {
+    external_link: 'Open in new tab',
+    mark_add: 'Add to favorites',
+    mark_remove: 'Remove from favorites',
+    copy: 'Copy link',
   },
   action: {
-    marked: 'Added to bookmarks',
-    unmarked: 'Removed from bookmarks',
+    marked: 'Added to favorites',
+    unmarked: 'Removed from favorites',
+    copied: 'Copied to clipboard',
+    copied_with_state: 'Copied {} to clipboard',
+  },
+  settings: {
+    appearance: {
+      label: 'Appearance',
+      language: {
+        label: 'Language',
+      },
+      color_mode: {
+        label: 'Color mode',
+        mode: {
+          light: 'Light',
+          dark: 'Dark',
+          auto: 'Auto',
+        },
+      },
+    },
+    about: {
+      label: 'About CTFever',
+      version: {
+        label: 'Version',
+        check_update_logs: 'Check update logs',
+      },
+      follow_us: {
+        label: 'Follow us',
+        subtitle: 'Follow us for updates and more',
+      },
+      donate: {
+        label: 'Donate',
+        subtitle: 'If you like CTFever, please buy us a coffee',
+        link: {
+          afdian: 'Afdian',
+        }
+      },
+    },
+    backend: {
+      label: 'Backend',
+      subtitle: 'Some tools require backend support',
+      endpoint: {
+        label: 'Endpoint',
+      },
+      version: {
+        label: 'Version',
+      }
+    },
+    danger_zone: {
+      label: 'Danger Zone',
+      subtitle: 'These actions may affect or clear local data',
+      wipe: {
+        label: 'Wipe local data',
+        subtitle: 'Clear all local data, unrecoverable',
+        btn: 'Wipe',
+        dialog: {
+          title: 'Wipe data',
+          content: 'Delete your local favorites list, all preferences, and recently used tools. This action cannot be undone',
+          okText: 'Confirm wipe',
+          cancelText: 'cancel',
+        },
+      }
+    }
   },
   common: {
     radix: {
@@ -35,6 +106,8 @@ export default {
       recommended: 'Recommended',
       beta: 'Experimental'
     },
+    copy: 'Copy',
+    copied: 'Copied',
     btn_encode: 'Encode',
     btn_decode: 'Decode',
     text_encoded: 'Encoded',
@@ -76,6 +149,9 @@ export default {
         title: 'Favorites',
         desc: 'Tools that you marked as favorite',
       },
+    },
+    settings: {
+      title: 'Preferences'
     },
     notFound: {
       title: 'Page Not Found',
@@ -188,7 +264,8 @@ export default {
     // Data Conversion
     radixConversion: {
       title: 'Radix Converter',
-      desc: 'Convert a number to a different radix'
+      desc: 'Convert a number to a different radix',
+      readable: 'Human Readable',
     },
     timeStamp: {
       title: 'Time Stamp Converter',
@@ -201,6 +278,14 @@ export default {
       fromNow: 'From Now',
       dayOfYear: 'Day of Year',
       weekOfYear: 'Week of Year'
+    },
+    base2img: {
+      title: 'Base64 to Image',
+      desc: 'Convert base64 string to image'
+    },
+    dataUnitsConversion: {
+      title: 'Data Unit Conversion',
+      desc: 'Convert data storage units'
     },
     // Program Related
     pycDecompiler: {
@@ -249,10 +334,6 @@ export default {
       title: 'Temperature Conversion',
       desc: 'Convert temperature into multiple units'
     },
-    base2img: {
-      title: 'Base64 to Image',
-      desc: 'Convert base64 string to image'
-    },
     coreValues: {
       title: 'Core Values Cipher',
       desc: 'Prosperity, democracy, civilization, harmony!'
@@ -268,6 +349,10 @@ export default {
     pseudoEncryptedZipCheck: {
       title: 'Pseudo Encrypted Zip Check',
       desc: 'Check if the zip file is pseudo encrypted'
+    },
+    zeroWidthSteganography: {
+      title: 'Zero Width Steganography',
+      desc: 'Plain text steganography with zero-width characters of Unicode'
     },
   },
   tags: {
